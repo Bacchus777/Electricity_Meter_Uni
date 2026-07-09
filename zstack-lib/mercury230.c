@@ -17,15 +17,15 @@
 static void Mercury230_StartStopData(uint8 serial_num, uint8 cmd);
 static bool Mercury230_CheckReady(void);
 
-static void Mercury230_RequestMeasure(uint8 serial_num, uint8 cmd);
+static void Mercury230_RequestMeasure(uint32 serial_num, uint8 cmd);
 
 static current_values_t Mercury230_ReadCurrentValues(uint8 cmd);
 
-static uint32 Mercury230_ReadEnergy(uint8 cmd);
+static current_values_t Mercury230_ReadEnergy(uint8 cmd);
 
 static uint16 MODBUS_CRC16( const unsigned char *buf, unsigned int len );
 
-extern zclMercury_t mercury230_dev = {&Mercury230_StartStopData, &Mercury230_CheckReady, &Mercury230_RequestMeasure, &Mercury230_ReadCurrentValues, &Mercury230_ReadEnergy};
+extern zclMercury_3ph_t mercury_3ph_dev = {&Mercury230_StartStopData, &Mercury230_CheckReady, &Mercury230_RequestMeasure, &Mercury230_ReadCurrentValues, &Mercury230_ReadEnergy};
 
 
 
@@ -116,7 +116,7 @@ static bool Mercury230_CheckReady()
 }
 
 
-void Mercury230_RequestMeasure(uint8 serial_num, uint8 cmd) 
+void Mercury230_RequestMeasure(uint32 serial_num, uint8 cmd) 
 {
   uint8 readMercury[MERCURY230_REQUEST_LENGTH]  = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
@@ -151,9 +151,10 @@ current_values_t Mercury230_ReadCurrentValues(uint8 cmd)
 {
   
   current_values_t result = {
-    {MERCURY_INVALID_RESPONSE, MERCURY_INVALID_RESPONSE, MERCURY_INVALID_RESPONSE}, 
-    {MERCURY_INVALID_RESPONSE, MERCURY_INVALID_RESPONSE, MERCURY_INVALID_RESPONSE}, 
-    {MERCURY_INVALID_RESPONSE, MERCURY_INVALID_RESPONSE, MERCURY_INVALID_RESPONSE}
+    .Voltage = {METER_INVALID_RESPONSE, METER_INVALID_RESPONSE, METER_INVALID_RESPONSE}, 
+    .Current = {METER_INVALID_RESPONSE, METER_INVALID_RESPONSE, METER_INVALID_RESPONSE}, 
+    .Power   = {METER_INVALID_RESPONSE, METER_INVALID_RESPONSE, METER_INVALID_RESPONSE},
+    .NeutralCurrent = 0
   };
   
   uint8 length;
@@ -211,36 +212,36 @@ current_values_t Mercury230_ReadCurrentValues(uint8 cmd)
   return result;
 }
 
-uint32 Mercury230_ReadEnergy(uint8 cmd) 
+current_values_t Mercury230_ReadEnergy(uint8 cmd) 
 {
-    uint32 result = 0xFFFFFFFF;//MERCURY_INVALID_RESPONSE;
-    
-    uint8 response[MERCURY230_E_RESPONSE_LENGTH] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+  current_values_t result = {.Energy = {METER_INVALID_RESPONSE, METER_INVALID_RESPONSE, METER_INVALID_RESPONSE, METER_INVALID_RESPONSE, METER_INVALID_RESPONSE, METER_INVALID_RESPONSE}};
+  
+  uint8 response[MERCURY230_E_RESPONSE_LENGTH] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+  HalUARTRead(MERCURY_PORT, (uint8 *)&response, sizeof(response) / sizeof(response[0]));
+
+  LREP("Mercury received: ");
+  for (int i = 0; i <= MERCURY230_E_RESPONSE_LENGTH - 1; i++) 
+  {
+    LREP("0x%X ", response[i]);
+  }
+  LREP("\r\n");
+  
+  uint16 crc = MODBUS_CRC16(response, MERCURY230_E_RESPONSE_LENGTH - 2);
+
+  LREP("Real CRC: ");
+  LREP("0x%X ", crc & 0xFF);
+  LREP("0x%X\r\n", (crc>>8) & 0xFF);
+  
+  if (response[MERCURY230_E_RESPONSE_LENGTH - 2] != (crc & 0xFF) || response[MERCURY230_E_RESPONSE_LENGTH - 1] != ((crc>>8) & 0xFF)) {
+    LREPMaster("Invalid response\r\n");
     HalUARTRead(MERCURY_PORT, (uint8 *)&response, sizeof(response) / sizeof(response[0]));
-
-    LREP("Mercury received: ");
-    for (int i = 0; i <= MERCURY230_E_RESPONSE_LENGTH - 1; i++) 
-    {
-      LREP("0x%X ", response[i]);
-    }
-    LREP("\r\n");
-    
-    uint16 crc = MODBUS_CRC16(response, MERCURY230_E_RESPONSE_LENGTH - 2);
-
-    LREP("Real CRC: ");
-    LREP("0x%X ", crc & 0xFF);
-    LREP("0x%X\r\n", (crc>>8) & 0xFF);
-    
-    if (response[MERCURY230_E_RESPONSE_LENGTH - 2] != (crc & 0xFF) || response[MERCURY230_E_RESPONSE_LENGTH - 1] != ((crc>>8) & 0xFF)) {
-        LREPMaster("Invalid response\r\n");
-        HalUARTRead(MERCURY_PORT, (uint8 *)&response, sizeof(response) / sizeof(response[0]));
-        return result;
-    }
-
-    result =  (uint32)response[2] * 0x1000000 + (uint32)response[1] * 0x10000 + (uint32)response[4] * 0x100 + (uint32)response[3];
-    LREP("Result: %ld\r\n", result);
-
     return result;
+  }
+
+  result.Energy[cmd] =  (uint32)response[2] * 0x1000000 + (uint32)response[1] * 0x10000 + (uint32)response[4] * 0x100 + (uint32)response[3];
+  LREP("Result: %ld\r\n", result.Energy[cmd]);
+
+  return result;
 }
 
 static uint16 MODBUS_CRC16 ( const unsigned char *buf, unsigned int len )

@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspace>
     <project>
-        <path>$WS_DIR$\Mercury_3ph.ewp</path>
+        <path>$WS_DIR$\Electricity_Meter_Uni.ewp</path>
     </project>
     <batchBuild>
         <batchDefinition>
             <name>ALL</name>
             <member>
-                <project>Mercury_3ph</project>
-                <configuration>Mercury_3ph_EndDevice</configuration>
+                <project>Electricity_Meter_Uni</project>
+                <configuration>Electricity_Meter_Uni_EndDevice</configuration>
             </member>
             <member>
-                <project>Mercury_3ph</project>
-                <configuration>Mercury_3ph_Router</configuration>
+                <project>Electricity_Meter_Uni</project>
+                <configuration>Electricity_Meter_Uni_Router</configuration>
             </member>
             <member>
-                <project>Mercury_3ph</project>
-                <configuration>Mercury_3ph_Router_CC2592</configuration>
+                <project>Electricity_Meter_Uni</project>
+                <configuration>Electricity_Meter_Uni_Router_CC2592</configuration>
             </member>
             <member>
-                <project>Mercury_3ph</project>
-                <configuration>Mercury_3ph_EndDevice_CC2592</configuration>
+                <project>Electricity_Meter_Uni</project>
+                <configuration>Electricity_Meter_Uni_EndDevice_CC2592</configuration>
             </member>
             <member>
-                <project>Mercury_3ph</project>
-                <configuration>Mercury_3ph_EndDevice_CC2591</configuration>
+                <project>Electricity_Meter_Uni</project>
+                <configuration>Electricity_Meter_Uni_EndDevice_CC2591</configuration>
             </member>
             <member>
-                <project>Mercury_3ph</project>
-                <configuration>Mercury_3ph_Router_CC2591</configuration>
+                <project>Electricity_Meter_Uni</project>
+                <configuration>Electricity_Meter_Uni_Router_CC2591</configuration>
             </member>
         </batchDefinition>
     </batchBuild>

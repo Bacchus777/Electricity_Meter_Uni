@@ -1,7 +1,7 @@
-#ifndef MERCURY200_H
-#define MERCURY200_H
+#ifndef MERCURY230_H
+#define MERCURY230_H
 
-#include "mercury.h"
+#include "meter.h"
 
-extern zclMercury_t mercury230_dev;
-#endif //MERCURY200_H
+extern zclMercury_3ph_t mercury_3ph_dev;
+#endif //MERCURY230_H

@@ -462,7 +462,7 @@
                 <option>
                     <name>Compiler Extra Options Edit</name>
                     <state>-f $PROJ_DIR$\..\..\..\Tools\CC2530DB\f8wRouter.cfg</state>
-                    <state>-f $PROJ_DIR$\..\..\..\Tools\CC2530DB\f8wConfig.cfg</state>
+                    <state>-f $PROJ_DIR$\..\zstack-lib\f8wConfig.cfg</state>
                     <state>-f $PROJ_DIR$\..\..\..\Tools\CC2530DB\f8wZCL.cfg</state>
                 </option>
                 <option>
@@ -775,7 +775,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state>Mercury_3ph.d51</state>
+                    <state>Electricity_Meter_Uni.d51</state>
                 </option>
                 <option>
                     <name>OutputFormat</name>
@@ -1143,7 +1143,7 @@
         </settings>
     </configuration>
     <configuration>
-        <name>Mercury_3ph_EndDevice</name>
+        <name>Electricity_Meter_Uni_EndDevice</name>
         <toolchain>
             <name>8051</name>
         </toolchain>
@@ -1254,15 +1254,15 @@
                 </option>
                 <option>
                     <name>ExePath</name>
-                    <state>Mercury_3ph_EndDevice\Exe</state>
+                    <state>Electricity_Meter_Uni_EndDevice\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>Mercury_3ph_EndDevice\Obj</state>
+                    <state>Electricity_Meter_Uni_EndDevice\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>Mercury_3ph_EndDevice\List</state>
+                    <state>Electricity_Meter_Uni_EndDevice\List</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -1917,7 +1917,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state>Mercury_3ph.d51</state>
+                    <state>Electricity_Meter_Uni.d51</state>
                 </option>
                 <option>
                     <name>OutputFormat</name>
@@ -2285,7 +2285,7 @@
         </settings>
     </configuration>
     <configuration>
-        <name>Mercury_3ph_Router</name>
+        <name>Electricity_Meter_Uni_Router</name>
         <toolchain>
             <name>8051</name>
         </toolchain>
@@ -2396,15 +2396,15 @@
                 </option>
                 <option>
                     <name>ExePath</name>
-                    <state>Mercury_3ph_Router\Exe</state>
+                    <state>Electricity_Meter_Uni_Router\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>Mercury_3ph_Router\Obj</state>
+                    <state>Electricity_Meter_Uni_Router\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>Mercury_3ph_Router\List</state>
+                    <state>Electricity_Meter_Uni_Router\List</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -3058,7 +3058,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state>Mercury_3ph.d51</state>
+                    <state>Electricity_Meter_Uni.d51</state>
                 </option>
                 <option>
                     <name>OutputFormat</name>
@@ -3426,7 +3426,7 @@
         </settings>
     </configuration>
     <configuration>
-        <name>Mercury_3ph_EndDevice_CC2592</name>
+        <name>Electricity_Meter_Uni_EndDevice_CC2592</name>
         <toolchain>
             <name>8051</name>
         </toolchain>
@@ -3537,15 +3537,15 @@
                 </option>
                 <option>
                     <name>ExePath</name>
-                    <state>Mercury_3ph_EndDevice_CC2592\Exe</state>
+                    <state>Electricity_Meter_Uni_EndDevice_CC2592\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>Mercury_3ph_EndDevice_CC2592\Obj</state>
+                    <state>Electricity_Meter_Uni_EndDevice_CC2592\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>Mercury_3ph_EndDevice_CC2592\List</state>
+                    <state>Electricity_Meter_Uni_EndDevice_CC2592\List</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -4202,7 +4202,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state>Mercury_3ph.d51</state>
+                    <state>Electricity_Meter_Uni.d51</state>
                 </option>
                 <option>
                     <name>OutputFormat</name>
@@ -4570,7 +4570,7 @@
         </settings>
     </configuration>
     <configuration>
-        <name>Mercury_3ph_Router_CC2592</name>
+        <name>Electricity_Meter_Uni_Router_CC2592</name>
         <toolchain>
             <name>8051</name>
         </toolchain>
@@ -4681,15 +4681,15 @@
                 </option>
                 <option>
                     <name>ExePath</name>
-                    <state>Mercury_3ph_Router_CC2592\Exe</state>
+                    <state>Electricity_Meter_Uni_Router_CC2592\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>Mercury_3ph_Router_CC2592\Obj</state>
+                    <state>Electricity_Meter_Uni_Router_CC2592\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>Mercury_3ph_Router_CC2592\List</state>
+                    <state>Electricity_Meter_Uni_Router_CC2592\List</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -5345,7 +5345,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state>Mercury_3ph.d51</state>
+                    <state>Electricity_Meter_Uni.d51</state>
                 </option>
                 <option>
                     <name>OutputFormat</name>
@@ -5713,7 +5713,7 @@
         </settings>
     </configuration>
     <configuration>
-        <name>Mercury_3ph_EndDevice_CC2591</name>
+        <name>Electricity_Meter_Uni_EndDevice_CC2591</name>
         <toolchain>
             <name>8051</name>
         </toolchain>
@@ -5824,15 +5824,15 @@
                 </option>
                 <option>
                     <name>ExePath</name>
-                    <state>Mercury_3ph_EndDevice_CC2591\Exe</state>
+                    <state>Electricity_Meter_Uni_EndDevice_CC2591\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>Mercury_3ph_EndDevice_CC2591\Obj</state>
+                    <state>Electricity_Meter_Uni_EndDevice_CC2591\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>Mercury_3ph_EndDevice_CC2591\List</state>
+                    <state>Electricity_Meter_Uni_EndDevice_CC2591\List</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -6489,7 +6489,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state>Mercury_3ph.d51</state>
+                    <state>Electricity_Meter_Uni.d51</state>
                 </option>
                 <option>
                     <name>OutputFormat</name>
@@ -6857,7 +6857,7 @@
         </settings>
     </configuration>
     <configuration>
-        <name>Mercury_3ph_Router_CC2591</name>
+        <name>Electricity_Meter_Uni_Router_CC2591</name>
         <toolchain>
             <name>8051</name>
         </toolchain>
@@ -6968,15 +6968,15 @@
                 </option>
                 <option>
                     <name>ExePath</name>
-                    <state>Mercury_3ph_Router_CC2591\Exe</state>
+                    <state>Electricity_Meter_Uni_Router_CC2591\Exe</state>
                 </option>
                 <option>
                     <name>ObjPath</name>
-                    <state>Mercury_3ph_Router_CC2591\Obj</state>
+                    <state>Electricity_Meter_Uni_Router_CC2591\Obj</state>
                 </option>
                 <option>
                     <name>ListPath</name>
-                    <state>Mercury_3ph_Router_CC2591\List</state>
+                    <state>Electricity_Meter_Uni_Router_CC2591\List</state>
                 </option>
                 <option>
                     <name>GOutputBinary</name>
@@ -7632,7 +7632,7 @@
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state>Mercury_3ph.d51</state>
+                    <state>Electricity_Meter_Uni.d51</state>
                 </option>
                 <option>
                     <name>OutputFormat</name>
@@ -8551,12 +8551,12 @@
             <name>$PROJ_DIR$\..\..\..\Tools\CC2530DB\f8wCoord.cfg</name>
             <excluded>
                 <configuration>CHDTECH_DEV</configuration>
-                <configuration>Mercury_3ph_EndDevice</configuration>
-                <configuration>Mercury_3ph_Router</configuration>
-                <configuration>Mercury_3ph_EndDevice_CC2592</configuration>
-                <configuration>Mercury_3ph_Router_CC2592</configuration>
-                <configuration>Mercury_3ph_EndDevice_CC2591</configuration>
-                <configuration>Mercury_3ph_Router_CC2591</configuration>
+                <configuration>Electricity_Meter_Uni_EndDevice</configuration>
+                <configuration>Electricity_Meter_Uni_Router</configuration>
+                <configuration>Electricity_Meter_Uni_EndDevice_CC2592</configuration>
+                <configuration>Electricity_Meter_Uni_Router_CC2592</configuration>
+                <configuration>Electricity_Meter_Uni_EndDevice_CC2591</configuration>
+                <configuration>Electricity_Meter_Uni_Router_CC2591</configuration>
             </excluded>
         </file>
         <file>
@@ -8566,9 +8566,9 @@
             <name>$PROJ_DIR$\..\..\..\Tools\CC2530DB\f8wRouter.cfg</name>
             <excluded>
                 <configuration>CHDTECH_DEV</configuration>
-                <configuration>Mercury_3ph_EndDevice</configuration>
-                <configuration>Mercury_3ph_EndDevice_CC2592</configuration>
-                <configuration>Mercury_3ph_EndDevice_CC2591</configuration>
+                <configuration>Electricity_Meter_Uni_EndDevice</configuration>
+                <configuration>Electricity_Meter_Uni_EndDevice_CC2592</configuration>
+                <configuration>Electricity_Meter_Uni_EndDevice_CC2591</configuration>
             </excluded>
         </file>
         <file>
@@ -8684,6 +8684,12 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\zstack-lib\hal_key.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\zstack-lib\mercury200.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\zstack-lib\mercury200.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\zstack-lib\mercury230.c</name>
