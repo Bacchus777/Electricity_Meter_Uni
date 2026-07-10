@@ -44,6 +44,11 @@
 #include "utils.h"
 #include "version.h"
 
+#if defined (OTA_CLIENT) && (OTA_CLIENT == TRUE)
+  #include "zcl_ota.h"
+  #include "hal_ota.h"
+#endif
+
 /*********************************************************************
  * MACROS
  */
@@ -74,12 +79,18 @@ void user_delay_ms(uint32_t period) { MicroWait(period * 1000); }
  * LOCAL VARIABLES
  */
 
+#if defined (OTA_CLIENT) && (OTA_CLIENT == TRUE)
+  #define DEVICE_POLL_RATE                 8000   // Poll rate for end device
+#endif
 
 /*********************************************************************
  * LOCAL FUNCTIONS
  */
 static void zclApp_BasicResetCB(void);
 static ZStatus_t zclApp_ReadWriteAuthCB(afAddrType_t *srcAddr, zclAttrRec_t *pAttr, uint8 oper);
+#if defined (OTA_CLIENT) && (OTA_CLIENT == TRUE)
+  static void zclApp_ProcessOTAMsgs( zclOTA_CallbackMsg_t* pMsg );
+#endif
 
 static void zclApp_RestoreAttributesFromNV(void);
 static void zclApp_SaveAttributesToNV(void);
@@ -136,6 +147,11 @@ void zclApp_Init(byte task_id) {
     zclApp_SetDeviceModel(zclApp_Config.DeviceModel);
 
     osal_start_reload_timer(zclApp_TaskID, APP_REPORT_EVT, zclApp_Config.MeasurementPeriod * 1000);
+
+  #if defined (OTA_CLIENT) && (OTA_CLIENT == TRUE)
+      // Register for callback events from the ZCL OTA
+      zclOTA_Register(zclApp_TaskID);
+  #endif
 }
 
 static void zclApp_HandleKeys(byte portAndAction, byte keyCode) {
@@ -183,6 +199,11 @@ uint16 zclApp_event_loop(uint8 task_id, uint16 events) {
                     osal_mem_free(((zclIncomingMsg_t *)MSGpkt)->attrCmd);
                 }
                 break;
+#if defined (OTA_CLIENT) && (OTA_CLIENT == TRUE)
+            case ZCL_OTA_CALLBACK_IND:
+                zclApp_ProcessOTAMsgs( (zclOTA_CallbackMsg_t*)MSGpkt  );
+                break;
+#endif
 
             default:
                 break;
@@ -656,6 +677,63 @@ static void zclApp_SetDeviceModel(uint8 DeviceModel) {
   osal_mem_free(dstAddr);  
 */
 }
+
+#if defined (OTA_CLIENT) && (OTA_CLIENT == TRUE)
+/*********************************************************************
+ * @fn      zclSampleSw_ProcessOTAMsgs
+ *
+ * @brief   Called to process callbacks from the ZCL OTA.
+ *
+ * @param   none
+ *
+ * @return  none
+ */
+static void zclApp_ProcessOTAMsgs( zclOTA_CallbackMsg_t* pMsg )
+{
+  uint8 RxOnIdle;
+
+  switch(pMsg->ota_event)
+  {
+  case ZCL_OTA_START_CALLBACK:
+    if (pMsg->hdr.status == ZSuccess)
+    {
+      XNV_SPI_BEGIN();
+      XNV_SPI_TX(0xAB);
+      XNV_SPI_TX(0x00);
+      XNV_SPI_TX(0x00);
+      XNV_SPI_END();
+      // Speed up the poll rate
+      RxOnIdle = TRUE;
+      ZMacSetReq( ZMacRxOnIdle, &RxOnIdle );
+//      NLME_SetPollRate( 2000 );
+      NLME_SetPollRate( 300 );
+    }
+    break;
+
+  case ZCL_OTA_DL_COMPLETE_CALLBACK:
+    if (pMsg->hdr.status == ZSuccess)
+    {
+      // Reset the CRC Shadow and reboot.  The bootloader will see the
+      // CRC shadow has been cleared and switch to the new image
+      HalOTAInvRC();
+      SystemReset();
+    }
+    else
+    {
+#if (ZG_BUILD_ENDDEVICE_TYPE)    
+      // slow the poll rate back down.
+      RxOnIdle = FALSE;
+      ZMacSetReq( ZMacRxOnIdle, &RxOnIdle );
+      NLME_SetPollRate(DEVICE_POLL_RATE);
+#endif
+    }
+    break;
+
+  default:
+    break;
+  }
+}
+#endif // defined (OTA_CLIENT) && (OTA_CLIENT == TRUE)
 
 /****************************************************************************
 ****************************************************************************/

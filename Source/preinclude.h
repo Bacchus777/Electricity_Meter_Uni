@@ -21,6 +21,12 @@
 #define BDB_FINDING_BINDING_CAPABILITY_ENABLED 1
 #define BDB_REPORTING TRUE
 
+#define OTA_CLIENT TRUE
+#define OTA_HA
+#define OTA_MANUFACTURER_ID                           0x0777
+#define OTA_TYPE_ID                                   0x1234
+#define OTA_HDR_VERSION                               0x134FF39
+
 #define HAL_BUZZER FALSE
 #define HAL_KEY TRUE
 #define ISR_KEYINTERRUPT
@@ -40,12 +46,13 @@
 #error "Board type must be defined"
 #endif
 
+#define INT_HEAP_LEN 1900
+ 
 #if defined(HAL_BOARD_TARGET)
     #define HAL_KEY_P2_INPUT_PINS BV(0)
     #define MERCURY_PORT HAL_UART_PORT_0
     #define HAL_UART_DMA 1
     #define HAL_UART_ISR 2
-    #define INT_HEAP_LEN (2256 - 0xE)
 #elif defined(HAL_BOARD_CHDTECH_DEV)
     #define HAL_UART_DMA 1
     #define HAL_UART_ISR 2
@@ -60,7 +67,7 @@
 #ifdef DO_DEBUG_UART
     #define HAL_UART TRUE
     #define HAL_UART_DMA 1
-    #define INT_HEAP_LEN 2060
+//    #define INT_HEAP_LEN 2060
 #endif
 
 #define HAL_UART TRUE

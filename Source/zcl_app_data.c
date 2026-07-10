@@ -151,7 +151,7 @@ SimpleDescriptionFormat_t zclApp_FirstEP = {
 };
 
 CONST zclAttrRec_t zclApp_Attrs_SecondEP[] = {
-
+ 
     {SE_METERING, {ATTRID_SE_METERING_CURR_TIER5_SUMM_DLVD, ZCL_UINT48, RR, (void *)&zclApp_CurrentValues.Energy[5]}},
     {SE_METERING, {ATTRID_SE_METERING_CURR_SUMM_DLVD,       ZCL_UINT48, RR, (void *)&zclApp_CurrentValues.Energy[0]}},
     {SE_METERING, {ATTRID_SE_METERING_CURR_TIER1_SUMM_DLVD, ZCL_UINT48, RR, (void *)&zclApp_CurrentValues.Energy[1]}},

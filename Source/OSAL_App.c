@@ -19,6 +19,10 @@
 #include "bdb_interface.h"
 #include "zcl_app.h"
 
+#if defined (OTA_CLIENT) && (OTA_CLIENT == TRUE)
+  #include "zcl_ota.h"
+#endif
+
 const pTaskEventHandlerFn tasksArr[] = {macEventLoop,
                                         nwk_event_loop,
                                         Hal_ProcessEvent,
@@ -30,8 +34,12 @@ const pTaskEventHandlerFn tasksArr[] = {macEventLoop,
                                         zcl_event_loop,
                                         bdb_event_loop,
                                         zclApp_event_loop,
+                                        zclFactoryResetter_loop,
                                         zclCommissioning_event_loop,
-                                        zclFactoryResetter_loop};
+#if (defined OTA_CLIENT) && (OTA_CLIENT == TRUE)
+                                        zclOTA_event_loop,
+#endif
+                                        };
 
 const uint8 tasksCnt = sizeof(tasksArr) / sizeof(tasksArr[0]);
 uint16 *tasksEvents;
@@ -53,8 +61,11 @@ void osalInitTasks(void) {
     zcl_Init(taskID++);
     bdb_Init(taskID++);
     zclApp_Init(taskID++);
-    zclCommissioning_Init(taskID++);
     zclFactoryResetter_Init(taskID++);
+    zclCommissioning_Init(taskID++);
+#if (defined OTA_CLIENT) && (OTA_CLIENT == TRUE)
+    zclOTA_Init( taskID );
+#endif
 }
 
 /*********************************************************************

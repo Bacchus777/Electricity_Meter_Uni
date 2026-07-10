@@ -494,6 +494,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Components\stack\zdo</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Components\zmac</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Components\zmac\f8w</state>
+                    <state>$PROJ_DIR$\..\..\..\OTA\Source</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -841,7 +842,7 @@
                 </option>
                 <option>
                     <name>XclFile</name>
-                    <state>$PROJ_DIR$\..\..\..\Tools\CC2530DB\f8w2530.xcl</state>
+                    <state>D:\Texas Instruments\Z-Stack 3.0.2\Projects\zstack\Tools\CC2530DB\ota.xcl</state>
                 </option>
                 <option>
                     <name>XclFileSlave</name>
@@ -7030,7 +7031,7 @@
                 </option>
                 <option>
                     <name>General Xdata Stack Size</name>
-                    <state>0x400</state>
+                    <state>0x500</state>
                 </option>
                 <option>
                     <name>General Ext Stack Size</name>
@@ -7351,6 +7352,7 @@
                     <state>$PROJ_DIR$\..\..\..\..\..\Components\stack\zdo</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Components\zmac</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\Components\zmac\f8w</state>
+                    <state>$PROJ_DIR$\..\..\..\OTA\Source</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -7612,7 +7614,7 @@
             <archiveVersion>1</archiveVersion>
             <data>
                 <prebuild>Python.exe "$PROJ_DIR$\..\ver.py"</prebuild>
-                <postbuild></postbuild>
+                <postbuild>$PROJ_DIR$\..\firmwares\combine.bat "$CONFIG_NAME$"</postbuild>
             </data>
         </settings>
         <settings>
@@ -7628,11 +7630,11 @@
                 </option>
                 <option>
                     <name>XOutOverride</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OutputFile</name>
-                    <state>Electricity_Meter_Uni.d51</state>
+                    <state>$PROJ_DIR$\..\firmwares\$CONFIG_NAME$.hex</state>
                 </option>
                 <option>
                     <name>OutputFormat</name>
@@ -7698,7 +7700,7 @@
                 </option>
                 <option>
                     <name>XclFile</name>
-                    <state>$PROJ_DIR$\..\..\..\Tools\CC2530DB\f8w2530.xcl</state>
+                    <state>$PROJ_DIR$\..\..\..\Tools\CC2530DB\ota.xcl</state>
                 </option>
                 <option>
                     <name>XclFileSlave</name>
@@ -7806,7 +7808,7 @@
                 </option>
                 <option>
                     <name>DebugInformation</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>RuntimeControl</name>
@@ -7830,12 +7832,12 @@
                 </option>
                 <option>
                     <name>ExtraOutputFile</name>
-                    <state>$PROJ_DIR$\..\firmwares\$CONFIG_NAME$.hex</state>
+                    <state>$PROJ_DIR$\..\firmwares\$CONFIG_NAME$.sim</state>
                 </option>
                 <option>
                     <name>ExtraOutputFormat</name>
                     <version>11</version>
-                    <state>23</state>
+                    <state>60</state>
                 </option>
                 <option>
                     <name>ExtraFormatVariant</name>
@@ -8056,7 +8058,7 @@
             <name>$PROJ_DIR$\..\..\..\..\..\Components\stack\bdb\bdb_touchlink.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\Components\stack\bdb\bdb_touchlink.h</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\Components\stack\bdb\bdb_touchLink.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\..\Components\stack\bdb\bdb_touchlink_target.c</name>
@@ -8103,6 +8105,9 @@
                 <name>$PROJ_DIR$\..\..\..\..\..\Components\hal\include\hal_led.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Source\hal_ota.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\..\..\..\Components\hal\include\hal_sleep.h</name>
             </file>
             <file>
@@ -8132,6 +8137,9 @@
                     </file>
                     <file>
                         <name>$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\hal_led.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Source\hal_ota.c</name>
                     </file>
                     <file>
                         <name>$PROJ_DIR$\..\..\..\..\..\Components\hal\target\CC2530EB\hal_sleep.c</name>
@@ -8520,6 +8528,12 @@
         <file>
             <name>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl_general.h</name>
         </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl_ota.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\Components\stack\zcl\zcl_ota.h</name>
+        </file>
     </group>
     <group>
         <name>Security</name>
@@ -8573,6 +8587,9 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\Tools\CC2530DB\f8wZCL.cfg</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\..\Tools\CC2530DB\ota.xcl</name>
         </file>
     </group>
     <group>
